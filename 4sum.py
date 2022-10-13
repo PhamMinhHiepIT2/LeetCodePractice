@@ -1,26 +1,29 @@
 from typing import List
 
-from numpy import mat
-
 
 class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         n = len(nums)
-        print(n)
         nums.sort()
-        print(nums)
         res = []
-        i, j, m, k = 0, 0, 0, 0
-        for i in range(0, n-3, 1):
-            for j in range(i+1, n-2, 1):
-                for m in range(j+1, n-1, 1):
-                    s = nums[i] + nums[j] + nums[m]
-                    left_value = target - s
-                    final_el = binary_search(nums, m+1, n-1, left_value)
-                    if final_el != -110:
-                        match = [nums[i], nums[j], nums[m], final_el]
-                        if match not in res:
-                            res.append([nums[i], nums[j], nums[m], final_el])
+        flags = {}
+        for i in range(n):
+            for j in range(n-1, i, -1):
+                p = i + 1
+                q = j - 1
+                while p < q:
+                    total = nums[i] + nums[j] + nums[p] + nums[q]
+                    if total > target:
+                        q -= 1
+                    elif total < target:
+                        p += 1
+                    else:
+                        el = sorted([nums[i], nums[j], nums[p], nums[q]])
+                        if f"{nums[i]}{nums[j]}{nums[p]}{nums[q]}" not in flags:
+                            flags[f"{nums[i]}{nums[j]}{nums[p]}{nums[q]}"] = 1
+                            res.append(el)
+                        p += 1
+                        q -= 1
         return res
 
 
@@ -28,13 +31,13 @@ def binary_search(arr, l, r, x):
     if r >= l:
         mid = l + (r - l) // 2
         if arr[mid] == x:
-            return arr[mid]
+            return mid
         elif arr[mid] < x:
             return binary_search(arr, mid+1, r, x)
         else:
             return binary_search(arr, l, mid-1, x)
     else:
-        return -110
+        return 201
 
 
 if __name__ == "__main__":
