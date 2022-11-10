@@ -16,6 +16,26 @@ class Solution:
         return max(max_so_far, s - min_so_far)
 
 
+def kadane_with_max(nums):
+    cur_max, max_so_far = nums[0], nums[0]
+    n = len(nums)
+    for i in range(1, n):
+        cur_max = max(cur_max + nums[i], nums[i])
+        max_so_far = max(max_so_far, cur_max)
+    return max_so_far
+
+
+def kadane_with_min(nums):
+    cur_min, min_so_far = nums[0], nums[0]
+    n = len(nums)
+    for i in range(1, n):
+        cur_min = min(cur_min + nums[i], nums[i])
+        min_so_far = min(min_so_far, cur_min)
+    return min_so_far
+
+
 if __name__ == "__main__":
-    nums = [-3, -2, -3]
+    nums = [2, -1, 2]
     print(Solution().maxSubarraySumCircular(nums))
+    print(kadane_with_max(nums))
+    print(kadane_with_min(nums))
