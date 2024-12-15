@@ -8,5 +8,8 @@ class Solution:
         if nums[0] == max(nums):
             return nums[0]
 
+        n = len(nums)
+        s = sum(nums)
+
         while l < h:
             m = (l + h) // 2

@@ -14,7 +14,7 @@ class Solution:
                 maxD.pop()
             minD.append(r)
             maxD.append(r)
-            print(f"r={r}, minD={minD}, maxD={maxD}")
+            # print(f"r={r}, minD={minD}, maxD={maxD}")
 
             while nums[maxD[0]] - nums[minD[0]] > 2:
                 l += 1
@@ -24,7 +24,7 @@ class Solution:
                     maxD.popleft()
 
             res += r - l + 1
-            print(f"l={l}, r={r}, res={res}")
+            # print(f"l={l}, r={r}, res={res}")
 
         return res
 
